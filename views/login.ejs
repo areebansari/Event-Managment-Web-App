@@ -1,0 +1,25 @@
+<% include ./partials/header %>
+
+
+<div class="container">
+    <div class="row">
+        <h1 style="text-align: center">EMS Login</h1>
+        <div style="width: 50%; margin: 50px auto;">
+            <form action="/login" method="post">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="username" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="password" name="password" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Login">
+                </div>
+            </form>
+            New User?  <a href="/register">Register</a><hr>
+            <a href="/">Go Back</a>
+        </div>
+    </div>
+</div>
+<% include ./partials/footer %>
+

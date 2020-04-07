@@ -1,0 +1,37 @@
+<% include partials/decorations %>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="stylesheets/landing.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+
+
+<div class="jumbotron">
+	<h2>Submit A New Decorator</h2>
+	<a align="center" class="btn btn-primary btn-lg" href="/decorations/new">Add New Decorator</a>
+</div>
+
+<header class = "w3-container w3-blue">
+	<h1 align = "center">DECORATIONS</h1>
+</header>
+
+<div class = "container"></div>
+	<div class="row text-center" style="display:flex; flex-wrap: wrap;">
+		<% decorations.forEach(function(decorations){ %>
+			<div class="col-md-3 col-sm-6">
+				<div class="thumbnail">
+				<img src="<%= decorations.image %>">
+				<div class="caption">
+					<h4><%= decorations.name %></h4>
+				</div>
+				<p>
+					<a href="/decorations/<%=decorations._id %>" class="btn btn-primary">More Info</a>
+				</p>
+				</div>
+			</div>
+		<% }); %>
+	</div>
+</div>
+
+<% include partials/footer %>

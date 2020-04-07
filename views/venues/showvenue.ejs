@@ -1,0 +1,81 @@
+<% include partials/venues %>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="stylesheets/landing.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+
+ 
+<header class = "w3-container w3-teal">
+	 <h1 align = "center"><%= venue.name %></h1>
+</header>
+
+
+<!--<div class="caption-full">
+	<h4 class="pull-right">$9.00/night</h4>
+	<h4><a><%=venue.name%></a></h4>
+	<p><%= venue.description %></p>
+</div> -->
+
+
+<div class="row">
+	<div class="col-md-3">
+		<div class="list-group">
+			<li align="center" class="list-group-item active">DETAILS</li>
+			<li class="list-group-item">Category : <%= venue.category %></li>
+			<li class="list-group-item">Location : <%= venue.location %></li>
+			<li class="list-group-item">Capacity : <%= venue.capacity %></li>
+			<li class="list-group-item">Price : <%= venue.price %> CA$</li>
+			<li class="list-group-item">Catering : <%= venue.cateringAvailable %></li>
+			<li class="list-group-item">Decorations : <%= venue.decorationAvailable %></li>
+			<li class="list-group-item">Contact : <%= venue.contactno %></li>
+		</div>
+	</div>
+	<div class="col-md-9" align = "center">
+		<div class="thumbnail">
+            <p><%= venue.description %></p>
+			<img class="img-responsive" src="<%= venue.image %>">
+		</div>
+	</div>
+</div>
+
+<div>
+	<div class="text-right">
+		<a class="btn btn-primary btn-md btn-success" href="/venues/<%= venue._id %>/comments/new"> Add a new comment</a>
+	</div>
+	<div class="left">
+		<p>
+			<em>Submitted by: <a><%= venue.author.username %></a>, <%= moment(venue.createdAt).calendar() %></em>
+		</p>
+		<% if(currentUser && (venue.author.id.equals(currentUser._id) || currentUser.username == 'admin')){ %>
+			<a class="btn btn-warning" href="/venues/<%= venue._id %>/edit">Edit</a>
+			<form style="display: inline" action="/venues/<%= venue._id %>?_method=DELETE" method="POST" class="delete-form">
+			  <button class="btn btn-danger">Delete</button>
+			</form>
+			<% } %>
+	</div>
+
+	<hr>
+	<div class="left">
+		<h1>Reviews</h1>
+	</div>
+	<% venue.comments.forEach(function(comment){ %>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="well well-lg">
+			<strong> <%= comment.author.username %> </strong> 
+			<span class="pull-right"><%= moment(comment.createdAt).calendar() %></span>
+			<p><%= comment.text %></p>
+			<% if(currentUser && (comment.author.id.equals(currentUser._id) || currentUser.username == 'admin')){ %>
+			<form style="display: inline" class="text-right" action="/venues/<%=venue._id %>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+				<a href="/venues/<%= venue._id %>/comments/<%=comment._id%>/edit" class="btn btn-info btn-sm">EDIT</a>
+				<button class="btn btn-danger btn-sm">DELETE</button>
+			</form>
+			<% } %>
+		</div>
+		</div>
+	</div>
+		
+	<% }); %>
+</div>
+<% include partials/footer %>

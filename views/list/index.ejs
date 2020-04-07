@@ -1,0 +1,29 @@
+<% include ../partials/header %> 
+
+     <header class="jumbotron">
+         <div class="container">
+             <h1><span class="glyphicon glyphicon-tent"></span> Welcome To Event Management System!!</h1>
+             <p>Let us help you in planning your next event.</p>
+             <p>
+                <a class="btn btn-primary btn-lg" href="/list/new">Add New Campground</a>
+             </p>
+         </div>
+     </header>
+     
+     <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <% list.forEach(function(list){ %>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                   <img src="<%= list.image %>">
+                   <div class="caption">
+                       <h4><%= list.name %></h4>
+                   </div>
+                   <p>
+                       <a href="/list/<%= list._id %>" class="btn btn-primary">More Info</a>
+                   </p>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+
+<% include ../partials/footer %>
